@@ -12,6 +12,30 @@ const getToken = (user) => {
   })
 }
 
+const isAuth = (req, res, next) => {
+  const token = req.headers.authorization;
+  if (token) {
+    const onlyToken = token.slice(7, token.length);
+    jwt.verify(onlyToken, config.JWT_SECRET, (err, decode) => {
+      if (err) {
+        return res.status(401).send({ msg: "Invalid Token" });
+      }
+      req.user = token;
+      next();
+      return
+    });
+  }
+  return res.status(401).send({ msg: "Token Not Supplied" })
+}
+
+const isAdmin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    return next();
+  } else {
+    return res.status(401).send({ msg: "Admin Token Invalid"})
+  }
+}
+
 export {
   getToken
 }
