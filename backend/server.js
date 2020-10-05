@@ -33,10 +33,10 @@ app.use('/api/products', productRoute);
 //   }
 // });
 
-// get list of all products
-app.get('/api/products', (req, res) => {
-  res.send(data.products);
-});
+// // get list of all products
+// app.get('/api/products', (req, res) => {
+//   res.send(data.products);
+// });
 
 app.listen(5000, () => {
   console.log("Server Live @ http://localhost:5000");

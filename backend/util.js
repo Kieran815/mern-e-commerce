@@ -14,18 +14,21 @@ const getToken = (user) => {
 
 const isAuth = (req, res, next) => {
   const token = req.headers.authorization;
+
   if (token) {
     const onlyToken = token.slice(7, token.length);
     jwt.verify(onlyToken, config.JWT_SECRET, (err, decode) => {
       if (err) {
         return res.status(401).send({ msg: "Invalid Token" });
       }
-      req.user = token;
+      req.user = decode;
       next();
       return
     });
+  } else {
+    return res.status(401).send({ msg: "Token Not Supplied" })
   }
-  return res.status(401).send({ msg: "Token Not Supplied" })
+
 }
 
 const isAdmin = (req, res, next) => {
@@ -36,6 +39,4 @@ const isAdmin = (req, res, next) => {
   }
 }
 
-export {
-  getToken
-}
+export { getToken, isAuth, isAdmin }
