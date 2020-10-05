@@ -161,7 +161,6 @@ function ProductsScreen(props) {
           </tbody>
         </table>
       </div>
-
     </div>
   )
 }

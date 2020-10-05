@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { register } from '../actions/userActions';
 
-function SigninScreen(props) {
+function RegisterScreen(props) {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -12,10 +12,11 @@ function SigninScreen(props) {
   const userRegister = useSelector(state => state.userRegister);
   const { loading, userInfo, error } = userRegister;
   const dispatch = useDispatch();
+  const redirect = props.location.search ? props.location.search.split("=")[1] : '/';
 
   useEffect(() => {
     if(userInfo) {
-      props.history.push('/');
+      props.history.push(redirect);
     }
     return () => {
       //
@@ -63,11 +64,12 @@ function SigninScreen(props) {
             <button type="submit" className="button primary">Register</button>
           </li>
           <li>
-            Already have an Account? <Link to="/signin">Sign In</Link>
+            Already have an Account?
+            <Link to={redirect === "/" ? "signin" : "signin?redirect=" + redirect} className="button secondary text-center" >Create your amazona account</Link>
           </li>
         </ul>
       </form>
     </div>
   )
 }
-export default SigninScreen;
+export default RegisterScreen;
