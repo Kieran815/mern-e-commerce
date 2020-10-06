@@ -7,6 +7,9 @@ import ProductsScreen from './screens/ProductsScreen';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import ShippingScreen from './screens/ShippingScreen';
+import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import { useSelector } from 'react-redux';
 
 function App() {
@@ -31,7 +34,7 @@ function App() {
             <Link to="/">MERN E-Commerce</Link>
           </div>
           <div className="header-links">
-            <a href="cart.html">Cart</a>
+            <a href="cart/">Cart</a>
             {
               userInfo ? <Link to="/profile">{userInfo.name}</Link> :
               <Link to="/signin">Sign In</Link>
@@ -56,6 +59,9 @@ function App() {
         <main className="main">
           <div className="content"> {/* Change Routes to display custom landing page, etc. */}
             <Route path="/products" component={ProductsScreen} />
+            <Route path="/shipping" component={ShippingScreen} />
+            <Route path="/payment" component={PaymentScreen} />
+            <Route path="/placeorder" component={PlaceOrderScreen} />
             <Route path="/signin" component={SigninScreen} />
             <Route path="/register" component={RegisterScreen} />
             <Route path="/product/:id" component={ProductScreen} />
